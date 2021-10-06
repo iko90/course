@@ -1,52 +1,47 @@
-- name: exzample
+- name: Lesson12
   gather_facts: false
   hosts: [all]
   become: yes
 
   tasks:
-    - name: Install python
-      apt:
-        name: python3-pip
-        state: latest 
-        force: yes
-        force_apt_get: yes
-        update_cache: yes
+    - name: Install yum utils
+      yum:
+        name: yum-utils
+        state: latest
 
+    - name: Install device-mapper-persistent-data
+      yum:
+        name: device-mapper-persistent-data
+        state: latest
 
     - name: Install iptables
-      apt:
+      yum:
         name: iptables
         state: latest
 
     - name: Install lvm2
-      apt: 
+      yum:
         name: lvm2
-        state: latest 
+        state: latest
 
-    - name: Set up the repository
-      apt: 
-        name: 
-          - apt-transport-https
-          - ca-certificates
-          - curl
-          - gnupg
-          - lsb-release
+    - name: Install python3
+      yum:
+        name: python3
+        state: latest   
 
+    - name: Install docker pip
+      pip:
+        name: docker
 
-
-    - name: Add Docker’s GPG key and set up stable repository
-      shell:
-        cmd: |
-          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-          sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-    
+    - name: Add Docker repo
+      get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docer-ce.repo
+      become: yes
 
     - name: Install Docker
       package:
-        name: 
-          - docker-ce
-          - docker-ce-cli
-          - containerd.io
+        name: docker-ce
         state: latest
       become: yes
 
@@ -57,9 +52,9 @@
         enabled: yes
       become: yes
 
-    - name: Add user ubuntu to docker group
+    - name: Add user ec2-user to docker group
       user:
-        name: ubuntu
+        name: ec2-ser
         groups: docker
         append: yes
       become: yes

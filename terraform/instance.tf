@@ -1,5 +1,5 @@
 resource "aws_instance" "linux-instance" {
-  ami           = "ami-05f7491af5eef733a"
+  ami           = "ami-06ec8443c2a35b0ba"
   instance_type = "t2.micro"
 
   subnet_id = aws_subnet.exzample-subnet-public-1.id
