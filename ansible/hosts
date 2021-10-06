@@ -2,4 +2,4 @@
 ansible_user=ec2-user
 
 [all]
-ec2 ansible_host=
+ec2_ansible_host=
