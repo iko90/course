@@ -56,4 +56,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: terraform
+<<<<<<< HEAD
           path: terraform.log
+=======
+          path: terraform.log
+>>>>>>> 5c70f5b1e04442c6544ebc2fdda7f0a495675b6b
